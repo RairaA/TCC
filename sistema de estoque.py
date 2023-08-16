@@ -8,8 +8,8 @@ from tkinter import messagebox
 conexao = mysql.connector.connect(
     host='localhost',
     user='root',
-    password='macaco123@3',
-    database='dados_usuario',
+    password='senha',
+    database='nome do banco de dados',
 )
 
 cursor = conexao.cursor()
