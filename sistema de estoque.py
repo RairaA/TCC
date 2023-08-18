@@ -34,17 +34,18 @@ def imagem():
     imagem7=r'C:\Users\Dell\Downloads\walpaper\tela_config.png'
     imagem8=r'C:\Users\Dell\Downloads\walpaper\tela_botao.png'
 def main():
-#______________________________________________________MONTAGEM DA JANELA LOGIN__________________________________________________
+#______________________________________________________MONTAGEM DA JANELA LOGIN_____________________________________________
     #criar a janela login
     janela=tk.Tk()
-    janela.title('login')
+    janela.title('LOGIN')
     max_width=960
     max_height=540
-#______________________________________________________CRIANDO PRIMEIRAS DEF'S__________________________________________________
+#______________________________________________________CRIANDO PRIMEIRAS DEF'S_______________________________________________
 
     # DEF HOME
     def home():
-    #______________________________________________________MONTAGEM DA JANELA HOME__________________________________________________
+        global imagem2
+    #______________________________________________________MONTAGEM DA JANELA HOME____________________________________________
         try:
             janela.destroy()
         except:
@@ -56,7 +57,7 @@ def main():
         janela2.title('HOME')
 
 
-        #______________________________________________________CRIANDO SEGUNDAS DEF'S__________________________________________________
+        #______________________________________________________CRIANDO SEGUNDAS DEF'S____________________________________________
         
         #DEF VOLTAR LOGIN
         def voltar_loginh():
@@ -64,20 +65,21 @@ def main():
             main()
         # DEF VER ESTOQUE 
         def estoque():
+            global imagem4
             janela2.destroy()
             print( 'ESTOQUE')
             pular()
-             #______________________________________________________MONTAGEM DA JANELA ESTOQUE__________________________________________________
+        #________________________________________________MONTAGEM DA JANELA ESTOQUE__________________________________________________
             #criar a janela de estoque 
             janela_e=tk.Tk()
             janela_e.title('Estoque')
-            #______________________________________________________CRIANDO TERCEIRA DEF'S__________________________________________________
+         #___________________________________________________CRIANDO TERCEIRA DEF'S____________________________________________________
             def voltar_estoque():
                 janela_e.destroy()
                 home()
             def adicionar_e():
                 titulo()
-            #_____________________________________________________ADICIONANDO WIDGETS NA TELA ESTOQUE___________________________________________________
+         #_____________________________________________________ADICIONANDO WIDGETS NA TELA ESTOQUE___________________________________________
             #carregando image 4
             carregar_imagem4=Image.open(imagem4)
             carregar_imagem4.thumbnail((max_width, max_height))
@@ -88,24 +90,25 @@ def main():
             lab4.image=lendo_imagem4
             lab4.pack()
 
-            #criar botão para voltar
+            #CRIANDO BUTTON'S
             bot_voltare=tk.Button(janela_e, command=voltar_estoque,text='< Voltar', borderwidth=0, bg='#8526b9')
             bot_voltare.place( x=907, y=13,width= 50, height=50 )
         #DEF PDV
         def vendas():
+            global imagem6
             janela2.destroy()
 
             print( 'VENDAS')
             pular()
-        
+        #______________________________________________________MONTAGEM DA JANELA VENDAS________________________________________________________
+    
             #criar a janela de vendas 
             janela_v=tk.Tk()
             janela_v.title('CAIXA ABERTO')
-
+        #______________________________________________________CRIANDO TERCEIRA DEF'S_____________________________________________________________
             def voltar_loginv():
                 janela_v.destroy()
                 home()
-    
         #_____________________________________________________ADICIONANDO WIDGETS NA TELA VENDAS___________________________________________________
             #carregando image 6
             carregar_imagem6=Image.open(imagem6)
@@ -117,21 +120,23 @@ def main():
             lab6.image=lendo_imagem6
             lab6.pack()
 
-             #criar botão para voltar para home
+             #CRIANDO BUTTON'S
             bot_voltarv=tk.Button(janela_v, command=voltar_loginv,text='< Voltar', borderwidth=0, bg='#8526b9')
             bot_voltarv.place( x=907, y=13,width= 50, height=50 )
         #DEF CONTATOS
         def contatos():
+            global imagem5
             janela2.destroy()
-
             print( 'CONTATOS')
             pular()
-            
-            #criar a janela de contatos 
-            janela_c=tk.Toplevel()
+        #______________________________________________________MONTAGEM DA JANELA CONTATOS________________________________________________________
+            janela_c=tk.Tk()
             janela_c.title('Contatos')
-    
-             #_____________________________________________________ADICIONANDO WIDGETS NA TELA CONTATOS___________________________________________________
+        #______________________________________________________CRIANDO TERCEIRA DEF'S______________________________________________________________
+            def voltar_loginc():
+                janela_c.destroy()
+                home()
+        #_____________________________________________________ADICIONANDO WIDGETS NA TELA CONTATOS___________________________________________________
             #carregando image 5
             carregar_imagem5=Image.open(imagem5)
             carregar_imagem5.thumbnail((max_width, max_height))
@@ -142,27 +147,25 @@ def main():
             lab5.image=lendo_imagem5
             lab5.pack()
 
-            #criar botão para voltar para home
+            #CRIAR BUTTON'S
             bot_voltarv=tk.Button(janela_c, command=voltar_loginc,text='< Voltar', borderwidth=0, bg='#8526b9')
             bot_voltarv.place( x=907, y=13,width= 50, height=50 )
-
-            def voltar_loginc():
-                janela_c.destroy()
-                home()
         #DEF CONFIGURAÇÕES 
         def config():
-
+            global imagem7
             janela2.destroy()
-
-    
             print( 'CONFIGURAÇÕES')
             pular()
-            
+        #______________________________________________________MONTAGEM DA JANELA CONTATOS________________________________________________________
+    
             #criar a janela de configurações  
-            janela_g=tk.Toplevel()
+            janela_g=tk.Tk()
             janela_g.title('CONFIGURAÇÕES')
-
-            #_____________________________________________________ADICIONANDO WIDGETS NA TELA CONFIGURAÇÃO ___________________________________________________
+        #______________________________________________________CRIANDO TERCEIRA DEF'S______________________________________________________________
+            def voltar_loging():
+                janela_g.destroy()
+                home()
+        #_____________________________________________________ADICIONANDO WIDGETS NA TELA CONFIGURAÇÃO _____________________________________________
             #carregando image 7
             carregar_imagem7=Image.open(imagem7)
             carregar_imagem7.thumbnail((max_width, max_height))
@@ -173,14 +176,10 @@ def main():
             lab7.image=lendo_imagem7
             lab7.pack()
 
+             #CRIAR BUTTON'S
             bot_voltarv=tk.Button(janela_g, command=voltar_loging,text='< Voltar', borderwidth=0, bg='#8526b9')
             bot_voltarv.place( x=907, y=13,width= 50, height=50 )
-
-            def voltar_loging():
-                janela_g.destroy()
-                home()
-    #______________________________________________________ADICIONANDO WIDGETS NA TELA HOME__________________________________________________
-    
+    #______________________________________________________ADICIONANDO WIDGETS NA TELA HOME_________________________________________
         #carregando image 2
         carregar_imagem2=Image.open(imagem2)
         carregar_imagem2.thumbnail((max_width, max_height))
@@ -237,14 +236,30 @@ def main():
             messagebox.showerror("Erro de Banco de Dados", f"Erro: {err}")
     #DEF CADASTRAR LOGIN
     def login():
-
         janela.destroy()
-        print('Cadastro de login')
-    
-        #criar janela
+        print('CADASTRAR LOGIN')
+        pular()
+#______________________________________________________MONTAGEM DA JANELA CADASTRAR_LOGIN______________________________________________
         janela3=tk.Tk()
-        janela3.title('cadastro de login')
+        janela3.title('CADASTRAR LOGIN')
+#______________________________________________________CRIANDO TERCEIRAS DEF'S_________________________________________________________
+        def set_cadastro():
+            usuario=entry_nome.get()
+            senha=entry_senha1.get()
+            num=entry_num.get()
+            email=entry_email.get()
+            func=entry_func.get()
+            
+            #ADICIONAR BANCO DE DADOS
+            comando= f'INSERT INTO cadastro(usuario,email,funcao,numero,senha) VALUES("{usuario}","{email}","{func}","{num}","{senha}")'
+            cursor.execute(comando) 
+            conexao.commit()
 
+            conexao.close()
+        def voltar_login():
+            janela3.destroy()
+            main()
+#______________________________________________________ADICIONANDO WIDGETS NA TELA LOGIN_______________________________________________
         #carregando image 3
         carregar_imagem3=Image.open(imagem3)
         carregar_imagem3.thumbnail((max_width, max_height))
@@ -257,56 +272,34 @@ def main():
         lab3.image=lendo_imagem3
         lab3.pack()
 
-        #criar o entry usuario
+        #CRIANDO ENTRY'S
         entry_nome=tk.Entry(janela3, bg='white',highlightthickness=0)
         entry_nome.place(x=120,y=205)
         print(f'O nome cadastrado foi={entry_nome}')
 
-        #criar o entry senha
         entry_senha1=tk.Entry(janela3, bg='white',highlightthickness=0)
         entry_senha1.place(x=120,y=255)
         print(f'A senha cadastrada foi={entry_senha1}')
 
-         #criar o entry email
         entry_email=tk.Entry(janela3, bg='white',highlightthickness=0)
         entry_email.place(x=120,y=310)
         print(f'O email cadastrado foi={entry_email}')
 
-        #criar o entry numero
         entry_num=tk.Entry(janela3, bg='white',highlightthickness=0)
         entry_num.place(x=132,y=370)
         print(f'O numero cadastrado foi={entry_num}')
 
-       #criar o entry função
         entry_func=tk.Entry(janela3, bg='white',highlightthickness=0)
         entry_func.place(x=130,y=430)
         print(f'A função cadastrada foi={entry_func}')
-        #criando a def de cadastrar no banco de dados 
-        def set_cadastro():
-            usuario=entry_nome.get()
-            senha=entry_senha1.get()
-            num=entry_num.get()
-            email=entry_email.get()
-            func=entry_func.get()
-            
-            #adicionar no banco de dados
-            comando= f'INSERT INTO cadastro(usuario,email,funcao,numero,senha) VALUES("{usuario}","{email}","{func}","{num}","{senha}")'
-            cursor.execute(comando) #executando o comando
-            conexao.commit()#editar o banco de dados
 
-            conexao.close()
-
-        def voltar_login():
-            janela3.destroy()
-            main()
-        
+       #CRIANDO BUTTON'S
         bot_voltar=tk.Button(janela3, command=voltar_login,text=' < Voltar', borderwidth=0, bg='white')
         bot_voltar.place( x=790, y=120,width= 50, height=50 )
 
         bot_salvar=tk.Button(janela3, command=set_cadastro,text=' < Salvar', borderwidth=0, bg='#244c04',fg="white")
         bot_salvar.place( x=77, y=490,width= 57, height=35 )
-
-#______________________________________________________ADICIONANDO WIDGETS NA TELA LOGIN__________________________________________________
+#______________________________________________________ADICIONANDO WIDGETS NA TELA LOGIN________________________________________
     global imagem1
     #carregar a imagem 1
     carregar_login=Image.open(imagem1)
