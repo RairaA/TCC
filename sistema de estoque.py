@@ -25,14 +25,14 @@ def pular():
 def imagem():
     
     global imagem1,imagem2,imagem3,imagem4,imagem5,imagem6,imagem7,imagem8
-    imagem1=r'C:\Users\Dell\Downloads\walpaper\tela_login.png'
-    imagem2=r'C:\Users\Dell\Downloads\walpaper\tela_home.png'
-    imagem3=r'C:\Users\Dell\Downloads\walpaper\tela_cadastro.png'
-    imagem4=r'C:\Users\Dell\Downloads\walpaper\tela1_estoque.png'
-    imagem5=r'C:\Users\Dell\Downloads\walpaper\tela_contatos.png'
-    imagem6=r'C:\Users\Dell\Downloads\walpaper\tela_caixa.png'
-    imagem7=r'C:\Users\Dell\Downloads\walpaper\tela_config.png'
-    imagem8=r'C:\Users\Dell\Downloads\walpaper\tela_botao.png'
+    imagem1=r'C:walpaper\tela_login.png'
+    imagem2=r'C:walpaper\tela_home.png'
+    imagem3=r'C:walpaper\tela_cadastro.png'
+    imagem4=r'C:walpaper\tela1_estoque.png'
+    imagem5=r'C:walpaper\tela_contatos.png'
+    imagem6=r'C:walpaper\tela_caixa.png'
+    imagem7=r'C:walpaper\tela_config.png'
+    imagem8=r'C:walpaper\tela_botao.png'
 def main():
 #______________________________________________________MONTAGEM DA JANELA LOGIN_____________________________________________
     #criar a janela login
@@ -55,7 +55,6 @@ def main():
 
         janela2=tk.Tk()
         janela2.title('HOME')
-
 
         #______________________________________________________CRIANDO SEGUNDAS DEF'S____________________________________________
         
@@ -91,8 +90,8 @@ def main():
             lab4.pack()
 
             #CRIANDO BUTTON'S
-            bot_voltare=tk.Button(janela_e, command=voltar_estoque,text='< Voltar', borderwidth=0, bg='#8526b9')
-            bot_voltare.place( x=907, y=13,width= 50, height=50 )
+            bot_voltare=tk.Button(janela_e, command=voltar_estoque,text='< Voltar', borderwidth=0, bg='#7c14c4')
+            bot_voltare.place( x=890, y=20,width= 90, height=50 )
         #DEF PDV
         def vendas():
             global imagem6
@@ -121,7 +120,7 @@ def main():
             lab6.pack()
 
              #CRIANDO BUTTON'S
-            bot_voltarv=tk.Button(janela_v, command=voltar_loginv,text='< Voltar', borderwidth=0, bg='#8526b9')
+            bot_voltarv=tk.Button(janela_v, command=voltar_loginv,text='< Voltar', borderwidth=0, bg='#7c14c4')
             bot_voltarv.place( x=907, y=13,width= 50, height=50 )
         #DEF CONTATOS
         def contatos():
@@ -148,8 +147,8 @@ def main():
             lab5.pack()
 
             #CRIAR BUTTON'S
-            bot_voltarv=tk.Button(janela_c, command=voltar_loginc,text='< Voltar', borderwidth=0, bg='#8526b9')
-            bot_voltarv.place( x=907, y=13,width= 50, height=50 )
+            bot_voltarv=tk.Button(janela_c, command=voltar_loginc,text='< Voltar', borderwidth=0, bg='#7c14c4')
+            bot_voltarv.place( x=900, y=20,width=70, height=50 )
         #DEF CONFIGURAÇÕES 
         def config():
             global imagem7
@@ -177,7 +176,7 @@ def main():
             lab7.pack()
 
              #CRIAR BUTTON'S
-            bot_voltarv=tk.Button(janela_g, command=voltar_loging,text='< Voltar', borderwidth=0, bg='#8526b9')
+            bot_voltarv=tk.Button(janela_g, command=voltar_loging,text='< Voltar', borderwidth=0, bg='#7c14c4')
             bot_voltarv.place( x=907, y=13,width= 50, height=50 )
     #______________________________________________________ADICIONANDO WIDGETS NA TELA HOME_________________________________________
         #carregando image 2
