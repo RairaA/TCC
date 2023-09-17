@@ -8,13 +8,16 @@ def globo():
     global conexao,cursor,janela,janela2,janela3,janela4,janela5,jnaela6,janela7,janela8,imagem1,imagem2,imagem3,imagem4,imagem5,imagem6,imagem7,imagem8
 def conect():
     global conexao, cursor
-    conexao = mysql.connector.connect(
+    try:
+        conexao = mysql.connector.connect(
         host='localhost',
         user='root',
         password='macaco123@3',
         database='dados_usuario',
     )
-    cursor = conexao.cursor()
+        cursor = conexao.cursor()
+    except mysql.connector.Error as erro:
+        print(f'Erro ao conectar ao banco de dados: {erro}')
 def conect2():
     global conexao, cursor
     conexao = mysql.connector.connect(
@@ -33,7 +36,7 @@ def pular():
     print('*'*30)
 def imagem():
     
-    global imagem1,imagem2,imagem3,imagem4,imagem5,imagem6,imagem7,imagem8,imagem9,imagem10
+    global imagem1,imagem2,imagem3,imagem4,imagem5,imagem6,imagem7,imagem8,imagem9,imagem10,imagem11,imagem12
     imagem1=r'C:walpaper\tela_login.png'
     imagem2=r'C:walpaper\tela_home.png'
     imagem3=r'C:walpaper\tela_cadastro.png'
@@ -44,6 +47,8 @@ def imagem():
     imagem8=r'C:walpaper\tela_botao.png'
     imagem9=r'C:walpaper\tela_excluir.png'
     imagem10=r'C:walpaper\tela_cadprodutos.png'
+    imagem11=r'C:walpaper\tela_config2.png'
+    imagem12=r'C:walpaper\tela_autentc.png'
 def main():
 #______________________________________________________MONTAGEM DA JANELA LOGIN_____________________________________________
     #criar a janela login
@@ -433,11 +438,14 @@ def main():
         #DEF CONFIGURAÇÕES 
         def config():
             global imagem7
-            janela2.destroy()
+        #______________________________________________________MONTAGEM DA JANELA CONFIG________________________________________________________
+            try:
+                janela2.destroy()
+            except:
+                print('janela já destruida')
             print( 'CONFIGURAÇÕES')
             pular()
-        #______________________________________________________MONTAGEM DA JANELA CONTATOS________________________________________________________
-    
+            
             #criar a janela de configurações  
             janela_g=tk.Tk()
             janela_g.title('CONFIGURAÇÕES')
@@ -446,7 +454,149 @@ def main():
                 janela_g.destroy()
                 home()
             def atualizar_dados():
-                titulo()
+                global imagem11
+                print( 'ATUALIZAR_CONFIGURAÇÕES')
+                pular()
+                #________________________________________________MONTAGEM DA JANELA ATUALIZAR_CONFIGURAÇÕES __________________________________________________   
+                #criar a janela de atualizar_cadastro
+                janela_k=tk.Toplevel()
+                janela_k.title('config')
+                max_width=768
+                max_height=432
+
+                 #carregando image11 
+                carregar_imagem11=Image.open(imagem11)
+                carregar_imagem11.thumbnail((max_width, max_height))
+                lendo_imagem11=ImageTk.PhotoImage(carregar_imagem11)
+
+                #CRIANDO LABEL PRINCIPAL
+                lab11=tk.Label(janela_k, image=lendo_imagem11)
+                lab11.image=lendo_imagem11
+                lab11.pack()
+                #___________________________________________________CRIANDO QUARTA DEF'S___________________________________________________________
+                def atualizou():
+                    conect()
+                    nome= entry_nome.get()
+                    if not nome:
+                        messagebox.showerror("Erro", "O campo Nome é obrigatório.")
+                        return
+
+                    senha = entry_senha.get() if entry_senha.get() else None
+                    email = entry_email.get() if entry_email.get() else None
+                    numero = entry_numero.get() if entry_numero.get() else None
+                    funcao = entry_funcao.get() if entry_funcao.get() else None
+
+                    try:
+                        comando = "UPDATE cadastro SET "
+                        if senha:
+                            comando += f"senha = '{senha}', "
+                        if email:
+                            comando += f"email = '{email}', "
+                        if numero:
+                            comando += f"numero = '{numero}', "
+                        if funcao:
+                            comando += f"funcao = '{funcao}', "
+
+                        comando = comando.rstrip(", ")
+                        comando += f" WHERE usuario = '{nome}'"
+
+                        cursor.execute(comando)
+                        conexao.commit()
+
+                        entry_nome.delete(0, tk.END)
+                        entry_email.delete(0, tk.END)
+                        entry_numero.delete(0, tk.END)
+                        entry_senha.delete(0, tk.END)
+                        entry_funcao.delete(0, tk.END)
+
+                        messagebox.showinfo("Sucesso", "Dados atualizados com sucesso!")
+
+                    except Exception as e:
+                        conexao.rollback()
+                        messagebox.showerror("Erro", f"Erro ao atualizar os dados: {str(e)}")
+                #_____________________________________________________ADICIONANDO WIDGETS NA TELA CONFIG___________________________________________
+                 #CRIAR ENTRY'S
+               # CRIAR ENTRIES
+                entry_nome = tk.Entry(janela_k,bg='#2c2c2c')
+                entry_nome.place(x=100, y=80)
+
+                entry_senha = tk.Entry(janela_k,bg='#2c2c2c')
+                entry_senha.place(x=100, y=145)
+
+                entry_email = tk.Entry(janela_k,bg='#2c2c2c')
+                entry_email.place(x=100, y=208)
+
+                entry_numero = tk.Entry(janela_k,bg='#2c2c2c')
+                entry_numero.place(x=103, y=267)
+
+                entry_funcao = tk.Entry(janela_k,bg='#2c2c2c')
+                entry_funcao.place(x=100, y=340)
+
+
+                #CRIAR BUTTON'S
+                bot_salvar=tk.Button(janela_k, command=atualizou, borderwidth=0,text='salvar',fg='white',bg='#2c4c04')
+                bot_salvar.pack()
+
+            def tela_autentificar():
+                global imagem12
+                janela_g.destroy()
+                print( 'Autentificar')
+                pular()
+                #________________________________________________MONTAGEM DA JANELA AUTENTIFICAR __________________________________________________   
+                #criar a janela de atualizar_cadastro
+                janela_a=tk.Tk()
+                janela_a.title('AUTENTIFICAR')
+
+                 #carregando image12
+                carregar_imagem12=Image.open(imagem12)
+                carregar_imagem12.thumbnail((max_width, max_height))
+                lendo_imagem12=ImageTk.PhotoImage(carregar_imagem12)
+
+                #CRIANDO LABEL PRINCIPAL
+                lab12=tk.Label(janela_a, image=lendo_imagem12)
+                lab12.image=lendo_imagem12
+                lab12.pack()
+                #______________________________________________________CRIANDO QUARTA DEF'S______________________________________________________________
+                
+                def usu_senh2():
+                    global nome1,senha
+                    # Obter usuário e senha das entradas
+                    nome1= entry_nome1.get()
+                    senha = entry_senha1.get()
+
+                    autentific()
+                def autentific():
+                    conect()
+                    nom=nome1
+                    sen=senha
+                    # Autenticar com o banco de dados MySQL
+                    try:
+                        cursor = conexao.cursor()
+                        comando= f"SELECT usuario, senha FROM cadastro WHERE usuario ='{nom}' AND senha = '{sen}'"
+                        print(comando)
+                        cursor.execute(comando) #executando o comando
+                        resultado=cursor.fetchall()#ler o banco de dados 
+                        print(resultado)
+
+                        if resultado:
+                            atualizar_dados()
+                        else:
+                            messagebox.showerror("Erro", "Login incorreto.")
+                        
+                        conexao.close()
+                    except mysql.connector.Error as err:
+                        messagebox.showerror("Erro de Banco de Dados", f"Erro: {err}")
+                #_____________________________________________________ADICIONANDO WIDGETS NA TELA AUTENTIFICAR ______________________________________
+                #CRIAR ENTRY'S 
+                entry_nome1=tk.Entry(janela_a,bg='#2c2c2c')
+                entry_nome1.place(x=370 , y=200)
+
+                entry_senha1=tk.Entry(janela_a,bg='#2c2c2c')
+                entry_senha1.place(x=370, y=295)
+
+                #CRIAR BUTTON'S
+                bot_at=tk.Button(janela_a, command=usu_senh2, borderwidth=0,text='login', bg='red', fg='white')
+                bot_at.place( x=412, y=420,width=50, height=50)
         #_____________________________________________________ADICIONANDO WIDGETS NA TELA CONFIGURAÇÃO _____________________________________________
             #carregando image 7
             carregar_imagem7=Image.open(imagem7)
@@ -458,24 +608,28 @@ def main():
             lab7.image=lendo_imagem7
             lab7.pack()
 
+            #nomes com duas linhas
+            nome_2linhas=''' Gestão de clientes 
+    e Fornecedores'''
+            
              #CRIAR BUTTON'S
-            bot_voltarv=tk.Button(janela_g, command=voltar_loging,text='< Voltar', borderwidth=0, bg='#7c14c4')
+            bot_voltarv=tk.Button(janela_g, command=voltar_loging,text='< Voltar', borderwidth=0, bg='#4d0c85')
             bot_voltarv.place( x=907, y=13,width= 50, height=50 )
 
-            bot_conta=tk.Button(janela_g)
-            bot_conta.place()
+            bot_conta=tk.Button(janela_g,command=tela_autentificar,text='Conta do Usuário', borderwidth=0, bg='#2c2c2c', fg='white')
+            bot_conta.place( x=140, y=157,width= 130, height=30)
 
-            bot_gestao=tk.Button(janela_g)
-            bot_gestao.place()
+            bot_gestao=tk.Button(janela_g,command=titulo, text=nome_2linhas, borderwidth=0, bg='#2c2c2c', fg='white')
+            bot_gestao.place(x=140, y=215,width= 130, height=60)
 
-            bot_suporte=tk.Button(janela_g)
-            bot_suporte.place()
+            bot_not=tk.Button(janela_g,command=titulo,text='Notificações', borderwidth=0, bg='#2c2c2c', fg='white')
+            bot_not.place(x=140, y=300,width= 130, height=30)
 
-            bot_not=tk.Button(janela_g)
-            bot_not.place()
+            bot_relat=tk.Button(janela_g,command=titulo,text='Relatórios e Análise', borderwidth=0, bg='#2c2c2c', fg='white')
+            bot_relat.place(x=140, y=385,width= 135, height=30)
 
-            bot_relat=tk.Button(janela_g)
-            bot_relat.place()
+            bot_suporte=tk.Button(janela_g,command=titulo,text='Suporte e Ajuda', borderwidth=0, bg='#2c2c2c',fg='white')
+            bot_suporte.place(x=140, y=460,width= 130, height=30)
 
     #______________________________________________________ADICIONANDO WIDGETS NA TELA HOME_________________________________________
         #carregando image 2
@@ -489,7 +643,7 @@ def main():
         lab2.pack()
 
         #CRIAR BUTTON'S
-        bot_voltar=tk.Button(janela2, command=voltar_loginh,text=' < Voltar', borderwidth=0, bg='white')
+        bot_voltar=tk.Button(janela2, command=voltar_loginh,text=' < Voltar', borderwidth=0)
         bot_voltar.place( x=907, y=10,width= 50, height=60 )
 
         botao_estoque=tk.Button(janela2, text='ESTOQUE', command=estoque,bg='#4d0c85' , borderwidth=0)
